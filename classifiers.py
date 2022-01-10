@@ -3,7 +3,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn import metrics
 import pandas as pd
 import numpy as np
 
@@ -25,10 +24,31 @@ class BayesClassifier:
         y_predicted = self.model.predict(x_test)
         print("Accuracy for the Multinomial Naive Bayes is: ", accuracy_score(y_test, y_predicted))
 
-        # prediction = model.predict(x_test)
+        # Make prediction
+        self.prediction(x_test[:10])
 
-        """report = metrics.classification_report(y_test, prediction, output_dict=True)
-        print(report)"""
+    def prediction(self, x_test):
+        y_predicted = self.model.predict(x_test)
+        print(y_predicted)
+
+
+class NearestNeighbours:
+    def __init__(self):
+        self.model = KNeighborsClassifier()
+
+    def knn(self, x, y):
+        # Compute training data and test data
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+        # Create and fit model
+        self.model = KNeighborsClassifier().fit(x_train, y_train)
+
+        # Evaluate model
+        y_predicted = self.model.predict(x_test)
+        print("Accuracy for the K Nearest Neighbours Algorithm: ", accuracy_score(y_test, y_predicted))
+
+        # Make prediction
+        self.prediction(x_test[:10])
 
     def prediction(self, x_test):
         y_predicted = self.model.predict(x_test)
@@ -57,6 +77,9 @@ def knn(x, y):
     # Evaluate model
     y_predicted = model.predict(x_test)
     print("Accuracy for the K Nearest Neighbours Algorithm: ", accuracy_score(y_test, y_predicted))
+
+    y_predicted = model.predict(x_test[:10])
+    print(y_predicted)
 
 
 def bayes_bernoulli(json_file):
