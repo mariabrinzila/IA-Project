@@ -3,20 +3,36 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn import metrics
 import pandas as pd
 import numpy as np
 
 
-def bayes_multinomial(x, y):
-    # Compute training data and test data
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, stratify=y)
+class BayesClassifier:
+    def __init__(self):
+        self.model = MultinomialNB()
 
-    # Create and fit model
-    model = MultinomialNB().fit(x_train, y_train)
+    def bayes_multinomial(self, x, y):
+        # Compute training data and test data
+        # 20% test data, 80% training data
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=8)
 
-    # Evaluate model
-    y_predicted = model.predict(x_test)
-    print("Accuracy for the Multinomial Naive Bayes is: ", accuracy_score(y_test, y_predicted))
+        # Create and fit model
+        # Maximum accuracy <=> alpha = 0.3
+        self.model = MultinomialNB(alpha=0.3).fit(x_train, y_train)
+
+        # Evaluate model
+        y_predicted = self.model.predict(x_test)
+        print("Accuracy for the Multinomial Naive Bayes is: ", accuracy_score(y_test, y_predicted))
+
+        # prediction = model.predict(x_test)
+
+        """report = metrics.classification_report(y_test, prediction, output_dict=True)
+        print(report)"""
+
+    def prediction(self, x_test):
+        y_predicted = self.model.predict(x_test)
+        print(y_predicted)
 
 
 def bayes_gaussian(x, y):
