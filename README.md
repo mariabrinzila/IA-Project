@@ -7,3 +7,4 @@
 # 4: https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
 # 5: https://www.tutorialspoint.com/artificial_intelligence_with_python/artificial_intelligence_with_python_primer_concepts.htm
 # 6: https://www.youtube.com/watch?v=-8XmD2zsFBI
+# 7: https://medium.com/analytics-vidhya/building-a-text-classification-model-using-bilstm-c0548ace26f2
