@@ -32,10 +32,6 @@ class Data:
         return x_test
 
     def transform_data(self):
-        """self.tweets1 = self.data1
-        self.tweets1 = self.tweets1.drop(["sarcastic", "sarcasm", "irony", "satire", "understatement",
-                                         "overstatement", "rhetorical_question"], axis=1)"""
-
         self.tweets = self.data.loc[self.data["sarcastic"].astype(int) == 1]
         self.tweets = self.tweets.drop(["sarcastic", "sarcasm", "irony", "satire", "understatement",
                                         "overstatement", "rhetorical_question"], axis=1)
@@ -60,7 +56,6 @@ class Data:
     def transform_text(self, words):
         lemmatizer = WordNetLemmatizer()
         self.corpus = []
-        corpus_test = []
 
         for i in range(len(words)):
             review = re.sub('[^a-zA-Z]', ' ', words["text"][i])
@@ -74,7 +69,6 @@ class Data:
     def transform_tweet(self, words):
         lemmatizer = WordNetLemmatizer()
         self.corpus = []
-        corpus_test = []
 
         for i in range(len(words)):
             review = re.sub('[^a-zA-Z]', ' ', words)
